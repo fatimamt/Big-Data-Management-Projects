@@ -10,6 +10,6 @@ __IMPORTANT__ Document oriented.
 ## Getting Started
 __Access the MongoDB database using shell__
 When initialazing in MongoDB, the sorce gives the options to work from the shell, locally, or online in [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). Once the cluster where you will work in is created, connect locally in the shell writing _mongo --_ followed by the access to the database. For this document, I will be using the provided by my professor.
--image init-
+![Initialize](image.png)
 
 
