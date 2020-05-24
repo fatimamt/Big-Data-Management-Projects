@@ -10,7 +10,7 @@ Some of the questions and answers are complemented with trusted online resoucers
 ## 1. Why the JSON format is so important? Mention an use. Does it have any disadvantage?
 The JSON format is an easy one to get started due to the structure that it follows.
 
-Example:
+Example of use: as a query to look for a book in a dataset.
 > books = {
 >
 >	"Title": "Big Data: Principles and best practices of scalable realtime data systems",
