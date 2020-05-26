@@ -78,16 +78,20 @@ Inserting a new document to your collection. If the collection does not exist ye
 
 ![insert](Cheatsheet/insert.png)
 
-If the message _WriteResult({ "nInserted": 1 })_ appears, the documment was successfully inserted.
+If the message
+```
+WriteResult({ "nInserted": 1 })
+```
+appears, the documment was successfully inserted.
 
 You can also use
-
-\> db._name_.insertOne({"field1":"value1", "field2":"value2", ...})
-
+```
+> db._name_.insertOne({"field1":"value1", "field2":"value2", ...})
+```
 or
-
-\> db._name_.insertMany(\[{"field1":"value1",...},{"field2":"value2",...},...\])
-
+```
+> db._name_.insertMany(\[{"field1":"value1",...},{"field2":"value2",...},...\])
+```
 to insert more than one document at the same time.
 
 ## 3. Find Documents
@@ -119,14 +123,22 @@ This method will delete documentch that match with the query.
 
 ![remove](Cheatsheet/remove.png)
 
-If the message _WriteResult({ "nRemoved": 1 })_ appears, the document(s) was/were successfully deleted.
+If the message
+```
+WriteResult({ "nRemoved": 1 })
+```
+appears, the document(s) was/were successfully deleted.
 
 ## Update data
 
 ### > db._name_.update({"field1":"value1"}, {"$set":{"field2":"newvalue"}})
 If you want to update some values in ypur collection, you use the update method which envolves a pair of brackets, that states the query parameter, a second pair of brackets which contains the update parameter with the "$set" operator to update all the matching documents.
 
-If the message _WriteResult({ "nMatched": 1, "nUpserted": 0, "nModified": 1  })_ appears, the document(s) was/were successfully updated.
+If the message
+```
+WriteResult({ "nMatched": 1, "nUpserted": 0, "nModified": 1  })
+```
+appears, the document(s) was/were successfully updated.
 
 ![set](Cheatsheet/set.png)
 
@@ -163,7 +175,38 @@ If what you want is to change field names, you can use the "$rename" operator. I
 
 ![rename](Cheatsheet/rename.png)
 
+### >db._name_.update({"field":"value"}, {"$set":{"field1.2":"newvalue"}})
+If you want to update an array value, you also can use the "$set" operator, but using dot dotation when calling the value. For instance, for...
 
+```
+"field":\["value1", "value2", "value3"]
+```
+
+the values are indexed from 0 to n. Therefore, if you want to update "value3", its index is 2 of the "field" field. Thus the command will be as mentioned before.
+
+![array](Cheatsheet/array.png)
+
+### > db._name_.update({"field":"value"}, {"$set":{"field1.$":"newvalue"}}, {"multi":true})
+If what you want to update are many values in an array instead, and the value has diferent index in every document, when using dot dotation, intead of state the index you have to put $ after the dot and also use the "multi":true option to make the change to all documents.
+
+![dollar](Cheatsheet/dollar.png)
+
+__Disclaimer for this command__ If some the array values are repeated, this command will only update the first value that match the query.
+
+### > db.potions.update({"field":"value"}, {"$set":{"value1.fieldembedded":"newvalue"}})
+If you want to update an embedded value, use dot dotation to specify the field embedded.
+
+
+
+
+## More operators
+As you might see from the commands, you can use as much operators as you want.
+
+Operator | Use
+-------- | ---
+$max | Updates if new value is greater than current or insert if empty
+$min | Updates if new value is less than current or inser if empty
+$mul | Multiplies current field value by specified value. If empty, it inserts 0
 
 
 
