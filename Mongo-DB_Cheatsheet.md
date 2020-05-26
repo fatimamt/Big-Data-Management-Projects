@@ -13,6 +13,9 @@ __IMPORTANT__ Mongo DB is document oriented.
 * __Shell:__ MongoDB comes with an JavaScript shell that allows interaction from the command line.
 * __
 
+## Install
+To install MongoDB to work from the shell, clic the [link](https://www.mongodb.com/download-center/community) to download it and in the [guide](https://docs.mongodb.com/guides/server/install/) to install it. If you want to use MongoDB online, You can use [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+
 ## 1. Get Started
 
 __Access the MongoDB database using shell__
