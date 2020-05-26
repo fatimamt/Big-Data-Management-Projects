@@ -123,29 +123,45 @@ If the message _WriteResult({ "nRemoved": 1 })_ appears, the document(s) was/wer
 
 ## Update data
 
-### > db._name_.update({"field1":"value1"}, {"$set":{"field2:"newvalue"}})
+### > db._name_.update({"field1":"value1"}, {"$set":{"field2":"newvalue"}})
 If you want to update some values in ypur collection, you use the update method which envolves a pair of brackets, that states the query parameter, a second pair of brackets which contains the update parameter with the "$set" operator to update all the matching documents.
 
-If the message _WriteResult({ "nMatched": 1, "nUpserted": 0, "nModified": 1  })_ appears, the document(s) was/were successfully udated.
+If the message _WriteResult({ "nMatched": 1, "nUpserted": 0, "nModified": 1  })_ appears, the document(s) was/were successfully updated.
 
 ![set](Cheatsheet/set.png)
 
 When the "$set" operator is not stated and the content inside the parenthesis goes of the kind of _{"field1":"value"},{"field2:"newvalue"}_ the data will be imported to the document.
 
-### > db._name_.update({"field1":"value1"}, {"$set":{"field2:"newvalue"}}, {"multi":true})
+### > db._name_.update({"field1":"value1"}, {"$set":{"field2":"newvalue"}}, {"multi":true})
 To update multiple documents, the third parameter "multi" must be of the kind _true_ to modified all matching documents.
 
 ![multi](Cheatsheet/multi.png)
 
-### > db._name_.update({"field1":"value1"}, {"$inc":{"field2:_number_}})
+### > db._name_.update({"field1":"value1"}, {"$inc":{"field2":_number_}})
 To increment a field by a specific value, you must use the "$inc" operator. The number will be the times the field is incremented (or decremented if using negative numbers) to.
 
 ![inc](Cheatsheet/inc.png)
 
 If the field does not exists, it gets created with the value.
 
+### > db._name_.update({"field1":"value1"}, {"$inc":{"field2":_number_}}, {"upsert":true})
+When the "upsert" option is equal to _true_, the document either is updated or created if the field does not exist. This option creates a document using the values from the query and update parameter.
 
+![upsert](Cheatsheet/upsert.png)
 
+"nUpserted" field of the WriteResult message must increment to know that the document(s) was/were successfully created. Otherwise, if that field is equal to 0 but both "nMatched" and "nModified" are different of zero, then the document(s) was/were successfully updated.
+
+### > db._name_.update({}, {"$unset":{"field1":""}}, {"multi":true})
+__Note__ If the query parameter (first pair of brackets) is empty, that means that all the documents of the collection will be taken. Similarly, if the value of the field to update is not stated, it takes all the values of that field.
+
+This command is to remove specified fields from all documents the query match (thanks to the "multi"":true option) due to the "$unset" operator.
+
+![unset](Cheatsheet/unset.png)
+
+### > db._name_.update({}, {"$rename":{"field":"newfield"}}, {"multi":true})
+If what you want is to change field names, you can use the "$rename" operator. Inside its brackets, for the value you have to open a new pair of brackets to specified the field you want to rename, followed by : and the new field name.
+
+![rename](Cheatsheet/rename.png)
 
 
 
