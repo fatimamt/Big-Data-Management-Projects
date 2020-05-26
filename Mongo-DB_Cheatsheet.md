@@ -4,33 +4,55 @@
 
 Open source NoSQL database, which means that catch-all term for databases that generally are not relational and that do not have a query language.
 
-__IMPORTANT__ Document oriented.
+__IMPORTANT__ Mongo DB is document oriented.
+
 ## Glosary
 * __Document:__ basic unit of data. Roughly equivalent to a row in a RDBMS.
 * __Collection:__ equivalent to a table with a dynamic schema.
 * __Databases:__ each of which have its own collections.
-* __Shell:__ MongoDB comes with an JavaScript shell that allows interaction from the command line
-## 1. Getting Started
+* __Shell:__ MongoDB comes with an JavaScript shell that allows interaction from the command line.
+* __
+
+## 1. Get Started
+
 __Access the MongoDB database using shell__
 When initialazing in MongoDB, the sorce gives the options to work from the shell, locally, or online in [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
 Once the cluster where you will work in is created, connect locally in the shell writing ___mongo --___ followed by the access to the database. For this document, I will be using the provided by my professor.
 
-![Initialize](image.png)
+![Initialize](Init.png)
 
 If needed, enter the password.
 ### > show dbs
 To show all the databases. This list shows the name and size of the databases
+
+![showdbs](Cheatsheet/showdbs.png)
+
 ### > use _dbname_
 To switch to an specific database.
+
+![use](Cheatsheet/usetest.png)
+
 ### > db
 To see the database is currently assigned.
+
+![db](Cheatsheet/db.png)
+
 ### > db.createCollection("_name_")
 Create a new collection in the database.
+
+![createCollection](Cheatsheet/cretaCollection.png)
+
 ### > show collections
 To show all the collections in the database. You can use _show tables_ instead and the output is the same.
+
+![show collections](Cheatsheet/collections.png)
+
 ### > help
 To show a menu with more commands you may need and would like to give it a check.
+
+![help](Cheatsheet/help.png)
+
 ## 2. Insert Documents
 An unique _ _id_ field is given when a document is inserted using the ObjectId data Type.
 
