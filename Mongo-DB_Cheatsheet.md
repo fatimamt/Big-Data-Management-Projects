@@ -6,13 +6,23 @@ Open source NoSQL database, which means that catch-all term for databases that g
 
 __IMPORTANT__ Mongo DB is document oriented.
 
-## Glosary 
+## Glosary and important points
 * __Document:__ basic unit of data. Roughly equivalent to a row in a RDBMS.
 * __Collection:__ equivalent to a table with a dynamic schema.
 * __Databases:__ each of which have its own collections.
 * __Cluster:__ 
 * __Shell:__ MongoDB comes with an JavaScript shell that allows interaction from the command line.
+* __Method:__ 
+* __Operator:__ Always starts with a $.
+* __nRemoved:__ Number of documents deleted.
+* __nMatched:__ Number of documents matched.
+* __nUpserted:__ Number of documents that were created.
+* __nModified:__ Number of documents modified.
+* __log:__
 * MongoDB takes a values as string if "quoted".
+* You can add a date type for a value typing _new Date(year, month, day)_.
+* Furthermore, you can store any data type within an array.
+* Documents can be embedden within another by adding the document as a value for a given field.
 * 
 
 ## Install
@@ -61,7 +71,7 @@ To show a menu with more commands you may need and would like to give it a check
 ## 2. Insert Documents
 An unique _ _id_ field is given when a document is inserted using the ObjectId data Type.
 
-The general syntaxis is specifying the collection followed by the function/operation to perfom
+The general syntaxis is specifying the collection followed by the method to perfom
 
 ### > db._name_.insert({"field1":"value1", "field2":"value2", ...})
 Inserting a new document to your collection. If the collection does not exist yet, it will be created automatically.As the parameter, give the JSON object you want to insert ([JSON Syntax](https://www.w3schools.com/js/js_json_syntax.asp)).
@@ -96,6 +106,50 @@ To format the results of the collection.
 If you look for an specific field in your documents, express the values inside the operation writing the field and value.
 
 ![find()](Cheatsheet/find().png)
+
+### > db._name_.find({"field.fieldembedded":"value"}).pretty()
+To search for a field embedded into anothe document, you can use dot dotation to specify the embedded field you would like to search. The number of dots depends on the number of "levels" you have to pass through to get the desired field.
+
+![dotnotation](Cheatsheet/dotnotation.png)
+
+## 4. Delete
+
+### > db._name_.remove({"field":"value"})
+This method will delete documentch that match with the query.
+
+![remove](Cheatsheet/remove.png)
+
+If the message _WriteResult({ "nRemoved": 1 })_ appears, the document(s) was/were successfully deleted.
+
+## Update data
+
+### > db._name_.update({"field1":"value1"}, {"$set":{"field2:"newvalue"}})
+If you want to update some values in ypur collection, you use the update method which envolves a pair of brackets, that states the query parameter, a second pair of brackets which contains the update parameter with the "$set" operator to update all the matching documents.
+
+If the message _WriteResult({ "nMatched": 1, "nUpserted": 0, "nModified": 1  })_ appears, the document(s) was/were successfully udated.
+
+![set](Cheatsheet/set.png)
+
+When the "$set" operator is not stated and the content inside the parenthesis goes of the kind of _{"field1":"value"},{"field2:"newvalue"}_ the data will be imported to the document.
+
+### > db._name_.update({"field1":"value1"}, {"$set":{"field2:"newvalue"}}, {"multi":true})
+To update multiple documents, the third parameter "multi" must be of the kind _true_ to modified all matching documents.
+
+![multi](Cheatsheet/multi.png)
+
+### > db._name_.update({"field1":"value1"}, {"$inc":{"field2:_number_}})
+To increment a field by a specific value, you must use the "$inc" operator. The number will be the times the field is incremented (or decremented if using negative numbers) to.
+
+![inc](Cheatsheet/inc.png)
+
+If the field does not exists, it gets created with the value.
+
+
+
+
+
+
+
 
 
 
