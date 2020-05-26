@@ -64,7 +64,7 @@ An unique _ _id_ field is given when a document is inserted using the ObjectId d
 The general syntaxis is specifying the collection followed by the function/operation to perfom
 
 ### > db._name_.insert({"field1":"value1", "field2":"value2", ...})
-Inserting a new document to your collection. If the collection does not exist yet, it will be created automatically.As the parameter, give the JSON object you want to insert ([JSON Syntax](https://www.w3schools.com/js/js_json_syntax.asp).
+Inserting a new document to your collection. If the collection does not exist yet, it will be created automatically.As the parameter, give the JSON object you want to insert ([JSON Syntax](https://www.w3schools.com/js/js_json_syntax.asp)).
 
 ![insert](Cheatsheet/insert.png)
 
