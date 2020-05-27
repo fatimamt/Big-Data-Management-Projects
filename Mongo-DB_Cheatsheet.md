@@ -6,7 +6,7 @@ Open source NoSQL database, which means that catch-all term for databases that g
 
 __IMPORTANT__ Mongo DB is document oriented.
 
-## Glosary and important points
+## Glosary and important things to point out
 * __Document:__ basic unit of data. Roughly equivalent to a row in a RDBMS.
 * __Collection:__ equivalent to a table with a dynamic schema.
 * __Databases:__ each of which have its own collections.
@@ -116,6 +116,33 @@ To search for a field embedded into anothe document, you can use dot dotation to
 
 ![dotnotation](Cheatsheet/dotnotation.png)
 
+### > db._name_.find({"field1":"value1", "field2":"value2", ... }).pretty()
+You can query based on multiple criteria by passing in comma-separated queries
+
+![findmultiple](Cheatsheet/findmultiple.png)
+
+### > db._name_.find({"field":{"$lt":_number_}})
+"$lt" is to find documents where a field has an integer or float data type value _lower than_ the number stated.
+
+![lt](Cheatsheet/lt.png)
+
+### > db._name_.find({"field":{"$gt":_number_}})
+Opositely, "$gt" is to query an integer or float data type value _greater than_ the number stated.
+
+![gt](Cheatsheet/gt.png)
+
+### > db._name_.find({"field":{"$gt":_number_, "$lt":_number_}})
+You can combine two last operators to specify an interval.
+
+![gtlt](Cheatsheet/gtlt.png)
+
+
+
+
+
+![](Cheatsheet/.png)
+
+
 ## 4. Delete
 
 ### > db._name_.remove({"field":"value"})
@@ -129,7 +156,7 @@ WriteResult({ "nRemoved": 1 })
 ```
 appears, the document(s) was/were successfully deleted.
 
-## Update data
+## 5. Update data
 
 ### > db._name_.update({"field1":"value1"}, {"$set":{"field2":"newvalue"}})
 If you want to update some values in ypur collection, you use the update method which envolves a pair of brackets, that states the query parameter, a second pair of brackets which contains the update parameter with the "$set" operator to update all the matching documents.
@@ -175,7 +202,7 @@ If what you want is to change field names, you can use the "$rename" operator. I
 
 ![rename](Cheatsheet/rename.png)
 
-## 3.1 Updating arrays
+## 5.1 Updating arrays
 
 ### >db._name_.update({"field":"value"}, {"$set":{"field1.2":"newvalue"}})
 If you want to update an array value, you also can use the "$set" operator, but using dot dotation when calling the value. For instance, for...
