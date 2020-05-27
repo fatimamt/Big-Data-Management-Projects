@@ -175,11 +175,13 @@ If what you want is to change field names, you can use the "$rename" operator. I
 
 ![rename](Cheatsheet/rename.png)
 
+## 3.1 Updating arrays
+
 ### >db._name_.update({"field":"value"}, {"$set":{"field1.2":"newvalue"}})
 If you want to update an array value, you also can use the "$set" operator, but using dot dotation when calling the value. For instance, for...
 
 ```
-"field":\["value1", "value2", "value3"]
+"field":["value1", "value2", "value3"]
 ```
 
 the values are indexed from 0 to n. Therefore, if you want to update "value3", its index is 2 of the "field" field. Thus the command will be as mentioned before.
@@ -193,10 +195,33 @@ If what you want to update are many values in an array instead, and the value ha
 
 __Disclaimer for this command__ If some the array values are repeated, this command will only update the first value that match the query.
 
-### > db.potions.update({"field":"value"}, {"$set":{"value1.fieldembedded":"newvalue"}})
+### > db._name_.update({"field":"value"}, {"$set":{"value1.fieldembedded":"newvalue"}})
 If you want to update an embedded value, use dot dotation to specify the field embedded.
 
+### > db._name_.update({"field":"value"}, {"$pop":{"field1":_element_}})
+"$pop" operatior will remove either first or last value of an array. If 1, the last element will be removed. If -1 the first element.
 
+![pop](Cheatsheet/pop.png)
+
+### > db._name_.update({"field":"value"}, {"$push":{"field1":"newvalue"}})
+To add a value at the end of an array.
+
+![push](Cheatsheet/push.png)
+
+### > db._name_.update({"field":"value"}, {"$addToSet":{"field1":"newvalue"}})
+To add a value to the end of an array unless it is already present.
+
+![addToSet](Cheatsheet/addToSet.png)
+
+### > db._name_.update({"field":"value"}, {"$pull":{"field1":"newvalue"}})
+To remove any instance of a value from an array. I f the value is not unique, all instance will be removed from the array.
+
+![pull](Cheatsheet/pull.png)
+
+
+
+
+![](Cheatsheet/.png)
 
 
 ## More operators
