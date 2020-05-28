@@ -23,7 +23,6 @@ __IMPORTANT__ Mongo DB is document oriented.
 * You can add a date type for a value typing _new Date(year, month, day)_.
 * Furthermore, you can store any data type within an array.
 * Documents can be embedden within another by adding the document as a value for a given field.
-* 
 
 ## Install
 To install MongoDB to work from the shell, clic the [link](https://www.mongodb.com/download-center/community) to download it and in the [guide](https://docs.mongodb.com/guides/server/install/) to install it. If you want to use MongoDB online, you can use [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
@@ -136,6 +135,61 @@ You can combine two last operators to specify an interval.
 
 ![gtlt](Cheatsheet/gtlt.png)
 
+### > db._name_.find({"field":{"$ne":"value"}})
+"$ne" operator is to find fields that don't equal the specified value.
+
+![ne](Cheatsheet/ne.png)
+
+### > db._name_.find({"field":{"$elemMatch":{"$gt":_number_, "$lt":_number_}}}
+"$elemMatch" operator is to make sure that at least one element matches whatever criteria is followed.
+
+![elemMatch](Cheatsheet/elemMatch.png)
+
+## 3.1 Projections
+We can use projections to specify theexact fields we want back by setting their value to true. 
+
+### > db._name_.find({"field":{_any criteria_}}, {"field1":true, "field2":true})
+When selecting fields, all other fields but the \_id are automatically set to false.
+
+![projection](Cheatsheet/projection.png)
+
+### > db._name_.find({"field":{_any criteria_}}, {"field1":false, "field2":false})
+If you want all the fields except for a few, you can exclude fields. All fields but those set to false are defaulted to true.
+
+![excluded](Cheatsheet/excluded.png)
+
+### > db._name_.find({"field":{_any criteria_}}, {"field1":true, "field2":true, "\_id":false})
+Command to exclude the \_id field. It’s the only field that can be set to false when selecting other fields.
+
+![removeid](Cheatsheet/removeid.png)
+
+## 3.2 Cursor
+When applying _db.name.find()_ and the collection has a big amount of documents, the store by "pages" of 20 documents. So with that command you only see the first 20 documents.
+
+### db._name_.find().cursor()
+Method on cursor that returns the count of matching documents.
+
+![cursor](Cheatsheet/cursor.png)
+
+### db._name_.find().sort({"field":_element_})
+Cursor method to sort documents. If element is 1, the field will be ascending ordered, otherwise, if -1, to order descendending.
+
+![sort](Cheatsheet/sort.png)
+
+### db._name_.find().limit(_number_)
+Cursor method to implement simple pagination by limiting documents. The number stands for the number of document to show.
+
+![limit](Cheatsheet/limit.png)
+
+### db._name_.find().skip(_number_)
+Cursor method to implement simple pagination by skipping documents.
+
+![skip](Cheatsheet/skip.png)
+
+### db._name_.find().skip(_number_).limit(_number_)
+Basic pagination by limiting and skipping over documents.
+
+![skiplimit](Cheatsheet/skiplimit.png)
 
 
 
