@@ -191,12 +191,6 @@ Basic pagination by limiting and skipping over documents.
 
 ![skiplimit](Cheatsheet/skiplimit.png)
 
-
-
-
-![](Cheatsheet/.png)
-
-
 ## 4. Delete
 
 ### > db._name_.remove({"field":"value"})
@@ -298,6 +292,58 @@ To add a value to the end of an array unless it is already present.
 To remove any instance of a value from an array. I f the value is not unique, all instance will be removed from the array.
 
 ![pull](Cheatsheet/pull.png)
+
+## 6. Aggregation
+To combine data. The aggregation framework allows for advanced computations. I takes stage operators as parameters. FOr this charcateristic, you will see a new expressión "$field", which is called "field path" and is a link to a field in a document.
+
+(For this section I will change to another database for size purposes)
+
+From now on, I will be explaining some examples using new operators but you will realize that the qury can contain whatever you want to search.
+
+### >db._name_.aggregate(\[{"$group":{"\_id":"$field"}}])
+To group data
+
+![group](Cheatsheet/group.png)
+
+### >db._name_.aggregate(\[{"$group":{"\_id":"$field", _accumulator_}}}])
+Anything specified after the group key is considered an acumulator. They take a single expression and compute tha expression for grouped documents
+
+Accumulator:
+```
+"field1":{criteria}
+Example:
+"field1":{"$sum":1}
+```
+
+![accumulator](Cheatsheet/accumulator.png)
+
+### >db._name_.aggregate(\[{"$group":{"\_id":"$field", _accumulator_, _second accumulator_}}}])
+An accumulator can call a field path.
+
+```
+db._name_.aggregate([{"$group":{"\_id":"$field", "field1":{"$sum":4}, "field2":{"$sum":"$field3"}}}])
+```
+
+The example is to take "$field" as the "\_id", to sum 4 to the elements in "field1", and to sum the values of "$field3" in "field2".
+
+![secondaccumulator](Cheatsheet/secondaccumulator.png)
+
+__Note__ The accumulators can be named however you want.
+
+### > db._name_.aggregate(\[{"$group":{"\_id":"$field", "field1":{"$avg":"$field2"}}}])
+"$avg" is to take the average of the field path.
+
+![avg](Cheatsheet/avg.png)
+
+### > db._name_.aggregate(\[{"$group":{"\_id":"$field", "field1":{"$max":"$field2"}}}])
+To return the maximum of the field path.
+
+![max](Cheatsheet/max.png)
+
+### > db._name_.aggregate(\[{"$group":{"\_id":"$field", "field1":{"$max":"$field2"}, "field3":{"$min":"$field2"}}}])
+"$min" is to return the minimmum valu of the field path. Note that the field path for both "$max" and "$min" operators is the same. You can operate many operators for the same field.
+
+![min](Cheatsheet/min.png)
 
 
 
