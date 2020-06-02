@@ -9,9 +9,9 @@ Compute-intensive demands computation work where most of their execution time is
 whereas data-intensive is a class of applications that use data paralell aproach to process large volumes of data (with size of tera or petabytes).
 
 ### 2. What are the caracteristics that make a system reliable? Mention an example of a not reliable system.
-The reliability of a systems comes when it performs its intended functionality satisfactorily even under specific environmental and operating conditions. In data set terms, an example of the lack of system reliability is a relational database system (RDBS), which does  not fulfill the demand of information to store.
+The reliability of a systems comes when it performs its intended functionality satisfactorily even under specific environmental and operating conditions. An example of the lack of system reliability lays in the failure either human, software or hardware made. For instance, a human mistake in the software that can create a series of cascading failures in a important component within the system.
 
-### 3.
+### 3. 
 
 ### 4.
 
