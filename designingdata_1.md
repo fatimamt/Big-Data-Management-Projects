@@ -69,19 +69,19 @@ Weheras an imperative language tells the computer to perform certain operations 
 When dealing with a many-to-many relationship, relational model cannot handle complexity, so it become more natural to start modeling the data as a graph. A graph consists of two kinds of objects: **_vertices_** (nodes/entities) and **_edges_** (relationship/arcs).
 * Social graphs
 
-|Vertices|  People     |
+|Vertices|  Edges      |
 |--------|-------------|
-|Edges   |Who knows who|
+| People |Who knows who|
 
 * Web Graph
 
-|Vertices|  Web Pages  |
-|--------|-------------|
-|Edges   |HTML links   |
+|Vertices  |  Edges      |
+|----------|-------------|
+|Web Pages |HTML links   |
 
 * Road or rail networks
 
-|Vertices|  Junctions           |
-|--------|----------------------|
-|Edges   |Roads or railway lines|
+|Vertices  |  Edges               |
+|----------|----------------------|
+| Junctions|Roads or railway lines|
 
