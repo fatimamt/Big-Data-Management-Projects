@@ -45,5 +45,43 @@ It is the process of structure a relational database in a serio of normal forms.
 ### 5. What is database denormalization?
 Optimization technique which add redundant data to one or more tables. It is important to highight that is not the opposite of normalization. I'ts just a technique that goes after normalization.
 
-### 6. 
+### 6. What id CODASYL?
+Conference on Data Systems Languages (CODASYL) is a comitee in charged of standarize and implement the network model by several different database vendors. It is also known as the CODASYL model, which, basically, is a generalization of the hierarchical model.
+
+### 7. How is structured the hierarchical model?
+It follows a tree structure where every record has exactly one parent. What difference the hierarchical model from the network model is that a record in the latter can have multiple parents.
+
+### 8. How a CODASYL query works?
+By moving a cursor through the database by iterating over lists of records and following access paths. If a record had multiple parents, the application code had to keep track of all the various relationships. It is compared to navigation around an n-dimensional data space.
+
+### 9. Which are the two types of query language?
+When the relational model was introduced, it included a new way of querying data:
+* declarative query language in SQL
+
+In a declarative query language you just specify the pattern of the data you want, but not how to achieve that goal.
+
+* IBM's Information Management System (IMS) and CODASYL queried the database
+using imperative code.
+
+Weheras an imperative language tells the computer to perform certain operations in a certain order.
+
+### 10. Mention some examples of data that can be modeled as a graph (Graph-Like Data Models).
+When dealing with a many-to-many relationship, relational model cannot handle complexity, so it become more natural to start modeling the data as a graph. A graph consists of two kinds of objects: **_vertices_** (nodes/entities) and **_edges_** (relationship/arcs).
+* Social graphs
+
+|Vertices|  People     |
+|--------|-------------|
+|Edges   |Who knows who|
+
+* Web Graph
+
+|Vertices|  Web Pages  |
+|--------|-------------|
+|Edges   |HTML links   |
+
+* Road or rail networks
+
+|Vertices|  Junctions           |
+|--------|----------------------|
+|Edges   |Roads or railway lines|
 
