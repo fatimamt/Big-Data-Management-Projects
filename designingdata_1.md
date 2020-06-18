@@ -26,5 +26,18 @@ There is no generic architecture due to the problems with the volume of reads, w
 ### 7. If you are working on the coding part of the development of a system for certain company, and you are part of the first version of the prototype, which maintainability design principle(s) you have to fulfill to avoid difficulties that you collegues might face?
 Operability and simplicity. The former, to make it easy for operations teams to keep the system running smoothly, and the latter to make it easy for new engineers to understand the system, by removing as much complexity as possible from the system, avoiding a cascade of unnecessary failures.
 
+## Chapter 2. Data Models and Query Languages
 
+### 1. What was the original purpose of Relational Databases?
+Their roots lie in dusiness data processing in the 1960s and '70s, mainly used for transaction processing and batch processing.
+
+### 2. Is NoSQL a technology for databases?
+No. It refers more to a "semantic field" that hold those technologies that are not stored as relational databases way.
+
+### 3. What is a impedance mismatch related with databases?
+This term was introduces by electronics. Every electric circuit has a certain impedance on its I/O (resistance to alternating current). Therefore, an impedande mismatch can lead to signal reflection and other troubles.
+
+For databases, then, it refers to an specific state commonly use to critic SQL data model: if data is stored in relational tables, an akward translation layer is requires between the objects in the application code and the database model.
+
+### 4. 
 
