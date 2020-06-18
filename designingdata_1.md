@@ -39,5 +39,11 @@ This term was introduces by electronics. Every electric circuit has a certain im
 
 For databases, then, it refers to an specific state commonly use to critic SQL data model: if data is stored in relational tables, an akward translation layer is requires between the objects in the application code and the database model.
 
-### 4. 
+### 4. What is database normalization?
+It is the process of structure a relational database in a serio of normal forms. The latter with the purpose od reducing data redundancy and to improve its data integrity.
+
+### 5. What is database denormalization?
+Optimization technique which add redundant data to one or more tables. It is important to highight that is not the opposite of normalization. I'ts just a technique that goes after normalization.
+
+### 6. 
 
