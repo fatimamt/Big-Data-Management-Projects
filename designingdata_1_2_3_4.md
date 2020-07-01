@@ -85,3 +85,37 @@ When dealing with a many-to-many relationship, relational model cannot handle co
 |----------|----------------------|
 | Junctions|Roads or railway lines|
 
+## Chapter 3. Storage and Retrieval
+
+### 1. What are indexes? Mention an advantage and a disadvantage of indexes.
+An index in an _additional_ structure that is derived form the primary data to identify your information. To mention and advantage and a disadvantage, well-chosen indexes speed up read queries, but every index slows down writes. 
+
+### 2. What is a hash index?
+A hash index consists of a collection of buckets organized in an array. A hash function maps index keys to correspoding buckets in the hash index.
+
+### 3. Mention some of the reasons for append-only design to be considered a good design idea.
+* Merging old segments avoids the problem of data files getting fragmented over time
+* Concurrency and crash recovery are much simpler if fragment files are appen-only or immutable. 
+* Appending and segment merging are sequential write  operations, which are gererally faster than random writes, especially on magnetic spinning-disk hard drives.
+
+### 4. What is an SSTtable?
+It is file fulfilled with key-value string pairs. This file must be sorted by key in order to be considered an SSTable (Sorted String Table).
+
+### 5. Mention some advantages of the SStables over log segments with hash indexes
+* Merging segments is simple and efficient, even if the files are bigger than the available memory.
+* In order to find a particular key in the file, you no longer need to keep an index of all the keys in memory. 
+* Since read requests need to scan over several key-valye pairs in the requested range anyway, it is possible to group those records into a block and compress it before writting in to disk. Each entry of the sparse in-memory index then points at the start of a compressed block. Besides saving disk space, compression also reduces the I/O bandwidth use. 
+
+### 6. What is a B-tree?
+A B-tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.
+
+### 7. What does "transaction processing" means?
+Transaction processing just means allowing clients to make low-latency read and writes as opposed to _batch processing_ jobs, which only run periodically.
+
+### 8. What is a data warehouse?
+A data warehouse is a seperate dabatase that analysts can query to their hearts' content, without affecting Online Transaction Processing (OLTP). The data warehouse contains a read-only copy of the data in all the various OLTP systems in the company. 
+
+### 9. What's the philosophy behind _column-oriended storage_?
+The idea behind column-oriented storage is simple: Don't store all the values from one row together, but store all the values from each column together instead.
+
+## Chapter 4. Encoding and Evolution
