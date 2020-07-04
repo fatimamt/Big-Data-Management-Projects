@@ -119,3 +119,47 @@ A data warehouse is a seperate dabatase that analysts can query to their hearts'
 The idea behind column-oriented storage is simple: Don't store all the values from one row together, but store all the values from each column together instead.
 
 ## Chapter 4. Encoding and Evolution
+
+### 1. Let's say I made a change in my schema and, eventually, in my code; nevertheless, the user hasn't upgrade in his decive the newer version of my code so both version of it are coexisting in the same system. What characteristics does my code need to have for a good performance? 
+* Backward Compatibility: Newer code can read data that was written by older code
+* Forward Compatibility: Older code can read data that was written by newer code
+
+### 2. Mention two of the most typical representations for programs to work with data
+* Data structures: In memory, data is kept in objects, structs, lists, arrays, hast tables, trees, and so on. These data structures are optimized for efficient access and manipulations by the CPU. This is usually done using pointers. 
+* Files/sequence of bytes: When you want to write data to a file or send it over the network, you have to encode it as some kind of self-contained sequence of bytes. Since a pointer wouldn't make sense to any other process, this sequence-of-bytes representation looks quite different from the data structures that are normally used in memory.
+
+### 3. In a realistic and general scenario, is it advisable to use your language's built-in encoding for your data? why? 
+No. It's generally a bad idea to use it for anything other than very transient purposes.
+
+Even though they usually have plenty of advantages, they also have deep disadvantages like the fact that the encoding is often tied to a particular programming language, and reading the data in another language is very difficult. Another disadvantage is the fact that versioning data is an afterthought in these libraries: as they are intended for a quick and easy encoding of data, they often neglect the inconvenient problems of forward and backward compatibility
+
+### 4. If I want to remove or add a field in my schema, what do I need to take into consderation related to the compatibility of my system?
+Removing a field is just like adding a field, with backward and forward compatibility concerns reversed. That means you can only remove a field that is optional, and you can never use the same tag number again. 
+
+### 5. Imagine that I created a system a couple of years ago for a samll project; nonetheless, it grew so fast that one of my field that is currently a 32-bit variable datatype can no longer hold the information that needs to be stored in that field. How can I solve this issue and what problems could I face by solving it? 
+One solution can be changing the datatype of the field from a 32-bit integer into a 64-bit integer. New code can easily read data written by old code, because the parser can fill in any missing bits with zeros. However, if old code reads data written by new code, the old code is still using a 32-bit variable to hold the value. If the decoded 64-bit value won't fit in the 32 bits, it will be truncated. 
+
+### 6. What are the most used standardized data encodings and what is the developers' perspective on them?
+JSON, XML and CSV are the most common ones; they are widely known, widely supported, and almost as widely disliked. XML is often criticized for being too verbose and unnecessarily complicated. JSON's popularity is mainly due to its built-in support in web browsers and simplicity relative to XML. CSV is another popular language-independent format, albeit less powerful. 
+
+### 7. What is the biggest problem of CSV related to its schema?
+CSV does not have any schema, so it is up to the application to define the meaning of each row and column. If an application change adds a new row or column, you have to handle that change manually. 
+
+### 8. What is Apache Avro? Why kind of schemas does it have?  
+Apache Avro is another binary encoding format that is interestingly different from Protocol Buffers and Apache Thrift. It was started in 2009 as a result of Thrift not being a good fit for Hadoop's use cases.
+
+It has two schema languages: One intended for human editing, and one that is more easily machine-readable. 
+
+### 9. Speaking about Avro, what is it known as "the writer's schema"? What about "the reader's schema"?
+When an application wants to encode some data, it encodes the data using whatever version of the schema it knows about. That's the "writer's schema".
+
+When an application wants to decode some data, it is expecting the data to be in some schema, which is known as "the reader's schema". That is the schema that application code is relying on.
+
+### 10. How does compatibility work on Avro?
+With Avro, forward compatibility means that you can have a new version of the schema as writer and an old version of the schema as reader. Conversely, backward compatibility means that you can have a new version of the schema as reader and an old version as writer. 
+
+### 11. Let's say that I'm working with Avro and I have a data field called "Name". For me, that field is optional, so it is completely fine if it has values or not... How can I tell Avro that it can have null values? is that procedure the same for every programming language? 
+In some programming languages "null" is an accetable default variable for a field, this is: If you've declared a field as "string", if you don't write a value in that field it will automatically be read as "null".
+
+This is not the case for Avro. You must specify all of the valid datatypes for a field or otherwise will crash. In this example you must declare that field to be a string AND a null one.
+
