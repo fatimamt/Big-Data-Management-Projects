@@ -165,11 +165,16 @@ This is not the case for Avro. You must specify all of the valid datatypes for a
 
 ## Chapter 5. Replication
 
-### 1.
+### 1. Replication is the action of keeping a cop of the same data on multiple connected machines in a network. But why is it highly recomended?
+Replication gives the opportunity to keep data geographically close to the users, getting as a result the reduction of latency. Another advantage is that you give the system the capacity to continue working even if some of its parts have failed, hence, increasing the availabity. And finally, to scale out the number of machines that can serve read queries, therefore, increasing read throughput.
 
-### 2.
+### 2. What is the problem that comes with replication?
+Despite being a simple goal, it turns out to be a tricky problem, because it requires carefully tinking about concurrency and about all the things that can go wrong, with all the consequences. For intance, to deal with unavailable nodes and network interruptions.
 
-### 3.
+### 3. Mention the three main approaches to replication described on the book.
+* **Single-leader replication:** 
+* **Multi-leader replication:**
+* **Leaderless replication:**
 
 ### 4.
 
