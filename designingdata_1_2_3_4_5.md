@@ -163,3 +163,24 @@ In some programming languages "null" is an accetable default variable for a fiel
 
 This is not the case for Avro. You must specify all of the valid datatypes for a field or otherwise will crash. In this example you must declare that field to be a string AND a null one.
 
+## Chapter 5. Replication
+
+### 1.
+
+### 2.
+
+### 3.
+
+### 4.
+
+### 5.
+
+### 6. 
+
+### 7.
+
+### 8.
+
+### 9.
+
+### 10.
