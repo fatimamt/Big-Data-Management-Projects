@@ -172,15 +172,18 @@ Replication gives the opportunity to keep data geographically close to the users
 Despite being a simple goal, it turns out to be a tricky problem, because it requires carefully tinking about concurrency and about all the things that can go wrong, with all the consequences. For intance, to deal with unavailable nodes and network interruptions.
 
 ### 3. Mention the three main approaches to replication described on the book.
-* **Single-leader replication:** 
-* **Multi-leader replication:**
-* **Leaderless replication:**
+* **Single-leader replication:** Clients send all writes to a single note, which sends a steam of data cange events to the other replicas (followers). Read can be performed on any replica, but reads from followers may be stale.
+* **Multi-leader replication:** Clients send each write to one of the several leader nodes, any of which can accept writes. The leaders send streams of data change events to each other and to any follower nodes.
+* **Leaderless replication:** CLients send each write to several nodes, and read from several nodes in parallel in order ro detect and correct nodes with stale data.
 
-### 4.
+### 4. Which is an advantage of the single-leader replication?
+Single-leader replication is fairly easy to understand and there is no conflicy resolution to worry about.
 
-### 5.
+### 5. What is it to read-after-write consistency?
+It is a consistency model that helps to the developer to decide how an application shoul behave under a replication lag which causes strange effects. Basically, it refers to the users who should always see data that they submitted themselves.
 
-### 6. 
+### 6. Why concurrency issues are inherent to multi-leader and leaderless replication methods?
+Because they allow multiple writes to happen concurrently, conflicts may occur.
 
 ### 7.
 
