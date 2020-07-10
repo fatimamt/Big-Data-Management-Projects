@@ -185,10 +185,17 @@ It is a consistency model that helps to the developer to decide how an applicati
 ### 6. Why concurrency issues are inherent to multi-leader and leaderless replication methods?
 Because they allow multiple writes to happen concurrently, conflicts may occur.
 
-### 7.
+### 7. What are the disadvantages of synchronous replication?
+In synchronous replication, the leader waits for follower 1 to confirm before reporting success and before making the rest of the clients visible, therefore, the follower is guaranteed an updated copy of the data that is consistent with the leader, but in case there is any interruption or network failure the whole system goes down and stops because it does not work if there is no such synchronization between clients and leader.
 
-### 8.
+### 8. How to detect that a leader has failed?
+There is no foolproof way of detecting what has gone wrong, so most systems simply use a timeout: nodes frequently bounce messages back and forth between each other, and if a node doesn’t respond for some period of time—say, 30 seconds—it is assumed to be dead.
 
-### 9.
+### 9. How do you achieve high availability with leader-based replication?
+Follower failure: Catch-up recovery: On its local disk, each follower keeps a log of the data changes it has received from the leader. If a follower crashes and is restarted, or if the network between the leader and the follower is temporarily interrupted, the follower can recover quite easily: from its log, it knows the last transaction that was processed before the fault occurred.
 
-### 10.
+Leader failure: Failover: one of the followers needs to be promoted to be the new leader, clients need to be reconfigured to send their writes to the new leader, and the other followers need to start consuming data changes from the new leader.
+
+### 10. Describe the synchronous and asynhronous replication
+* Synchronous: The leader waits until the follower 1 has confirmed that it received the write before reporting success to the user, and before making the write visible to other clients.
+* Asynchronous: The leader sends the message, but doesn't wait for a response from the follower.
