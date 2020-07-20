@@ -197,8 +197,8 @@ Follower failure: Catch-up recovery: On its local disk, each follower keeps a lo
 Leader failure: Failover: one of the followers needs to be promoted to be the new leader, clients need to be reconfigured to send their writes to the new leader, and the other followers need to start consuming data changes from the new leader.
 
 ### 10. Describe the synchronous and asynhronous replication
-* Synchronous: The leader waits until the follower 1 has confirmed that it received the write before reporting success to the user, and before making the write visible to other clients.
-* Asynchronous: The leader sends the message, but doesn't wait for a response from the follower.
+* **Synchronous:** The leader waits until the follower 1 has confirmed that it received the write before reporting success to the user, and before making the write visible to other clients.
+* **Asynchronous:** The leader sends the message, but doesn't wait for a response from the follower.
 
 ## Chapter 6. Partitioning
 
@@ -212,8 +212,26 @@ Partioning has no other purpose than to spread the data and query load evenly ac
 You always have to choose a partitioning schema that is appropriate and that fits with your data, and rebalancing the partitions when nodes are added to or removed from the cluster.
 
 ### 4. Mention the two approaches to partitioning, just the main ones described on the book.
-* Key range partitioning:
+* **Key range partitioning:**
+In this approach the keys are sorted, and partition owns all the keys from some minimum up to some maximum. This gives the advantage in sorting when making efficient the range of queries possible, but there is a risk of hot sports if the application often accesses keys that are close together in the soorted order. Whereas partitions are typycally rebalanced dynamically by splitting the range into two subranges when a partition gets too big.
+* **Hash partitioning:**
+In this method, the hash function is applied to each key, and a partition owns a range of hashes.However, this approach destroys the ordering of keys by making range queries inefficient (heres is the contrast/difference with the latter approach). Nonetheless, the load is distributed more evenly.
 
-In this approach the keys are sorted, and partition owns all the keys from some minimum up to some maximum. This gives the advantage in sorting 
+### 5. How many partitions are made using the hash partitioning method?
+Using this approach, it is common to create a fixed number of partitions in advance, to assign several partitions to each node. It also moves entire partitions from one node to another when nodes are added or removed. A variant on here is the Dynamic partitioning.
 
-* Hash partitioning: 
+### 6. What happends if I need both an identification for the keys and to sort ordered?
+It is possible to have an hybrid on the methods for partitioning. For intances, for a compound key, you can use one part of the key to identify that partition and another part for the sort order.
+
+### 7. Mention the two methods seen in the book to have an interaction between partitioning and secondary indexes.
+* **Document-partitioned indexes:** The secondary indexes are stored in the same partition as the primary key and value.  It is also called the local indexes.
+* **Term-partitioned indexes:** The secondary indexes are partitioned separately, using the indexed values. It is also called the global indexes.
+
+### 8. What is the reason for partitioning to be combined with replication?
+So that copies for each partition are stored in multiple nodes. This means that, although each record belongs to exactly one partition, it may still be stored on several different nodes for fault tolerance.
+
+### 9. What is the approach of partitioning secondary indexes by document?
+Each partition is completely separate, meaning that each partition maintains its own secondary indexes, covering only the documents in that partition. It doesn’t care what data is stored in other partitions. Whenever you need to write to the database, to add, remove, or update a document, you only need to deal with the partition that contains the document ID that you are writing.
+
+### 10. What is a skewed partition and how does it affect partitioning? 
+A partition is called skewed when some partitions have more data or queries than other. A skewed partition is less effective than non-skewed ones.
