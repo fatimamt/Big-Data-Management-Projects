@@ -199,3 +199,21 @@ Leader failure: Failover: one of the followers needs to be promoted to be the ne
 ### 10. Describe the synchronous and asynhronous replication
 * Synchronous: The leader waits until the follower 1 has confirmed that it received the write before reporting success to the user, and before making the write visible to other clients.
 * Asynchronous: The leader sends the message, but doesn't wait for a response from the follower.
+
+## Chapter 6. Partitioning
+
+### 1. When it is needed to partition a dataset?
+When you have so much data that storing and processing it on a single machine is no longer feasible.
+
+### 2. Which one is the main purpose of partitioning?
+Partioning has no other purpose than to spread the data and query load evenly across multiple machine, avoiding hot spots (nodes with disproportionately high load).
+
+### 3. WHat is the problem that comes with partitioning your data?
+You always have to choose a partitioning schema that is appropriate and that fits with your data, and rebalancing the partitions when nodes are added to or removed from the cluster.
+
+### 4. Mention the two approaches to partitioning, just the main ones described on the book.
+* Key range partitioning:
+
+In this approach the keys are sorted, and partition owns all the keys from some minimum up to some maximum. This gives the advantage in sorting 
+
+* Hash partitioning: 
