@@ -208,7 +208,7 @@ When you have so much data that storing and processing it on a single machine is
 ### 2. Which one is the main purpose of partitioning?
 Partioning has no other purpose than to spread the data and query load evenly across multiple machine, avoiding hot spots (nodes with disproportionately high load).
 
-### 3. WHat is the problem that comes with partitioning your data?
+### 3. What is the problem that comes with partitioning your data?
 You always have to choose a partitioning schema that is appropriate and that fits with your data, and rebalancing the partitions when nodes are added to or removed from the cluster.
 
 ### 4. Mention the two approaches to partitioning, just the main ones described on the book.
