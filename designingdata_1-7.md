@@ -235,3 +235,46 @@ Each partition is completely separate, meaning that each partition maintains its
 
 ### 10. What is a skewed partition and how does it affect partitioning? 
 A partition is called skewed when some partitions have more data or queries than other. A skewed partition is less effective than non-skewed ones.
+
+## Chapter 7. Serializability
+
+### 1. What are the transactions?
+They are an abstraction layer that allows an application to pretend that certain concurrency problem and certain kinds of hardware and software faults do not exist.
+
+### 2. What is the purpose of a transaction abort?
+It basically reduces down a large class of errors, leaving to the application to just try and try again.
+
+### 3. What are some errors that come with transactions?
+* Processes crashing
+* Network interruptions
+* Power outages
+* Disk full
+* Unexpected concurrency
+
+### 4. Which ones are the considerations for the different isolation levels?
+* **Dirty reads:** One client reads another client's writes before they have been committed.
+* **Dirty writes:** One client overwrites data that another client has wirtten, but not committed.
+* **Read skew (nonrepeatable reads):** A client sees different parts of the database at different points in time.
+* **Lost updates:** Two clients concurrently perform a read-modify-write cyrcle. One overwrites the other's write without incorporating its changes, so data is lost.
+* **Write skew:** A transaction reads someting, makes a decision based on the value it saw, and wirtes the decision to the database. But, by the time the write is made, the premise of the decision is no longer true.
+* **Phantom reads:** A transaction reads objects that match some search condition. Another client makes a write that affects the results of that search.
+
+### 5. What are some solutions for the latter considerations?
+* **Dirty reads:** Read committed isolation level and stronger levels.
+* **Dirty writes:** Almost all transaction implementations prevent its problems.
+* **Read skew (nonrepeatable reads):** Snapshot isolation usually implemented with multi-version concurrency control (MVCC).
+* **Lost updates:** Some snapshot isolation implementations solves this automatically, whereas others do it manually.
+* **Write skew:** Serializable isolation.
+* **Phantom reads:** Snapsot isolation, owever, when dealing with phantoms in context of write skew require special treatment like index-range locks.
+
+### 6.  What is isolation in ACID?
+Isolation in the sense of ACID means that concurrently executing transactions are isolated from each other. The classic database textbooks formalize isolation as serializability, which means that each transaction can pretend that it is the only transaction running on the entire database. The database ensures that when the transactions have committed, the result is the same as if they had run serially (one after another), even though in reality they may have run concurrently
+
+### 7. What is the central idea of ACID consistency and on what does it depend?
+The idea of ACID consistency is that you have certain statements about your data (invariants) that must always be true. It depends on the application’s notion of invariants.
+
+### 8. How is described the philosophy of ACID database?
+If the database is in danger of violating its guarantee of atomicity, isolation, or durability, it would rather abandon the transaction entirely than allow it to remain half-finished.
+
+### 9. Why are concurrency bugs hard to find by testing?
+Because such bugs are only triggered when you get unlucky with the timing. Such timing issues might occur very rarely, and are usually difficult to reproduce.
